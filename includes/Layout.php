@@ -2,10 +2,12 @@
 
 class Layout
 {
+    public $site;
     public $base;
     public $title;
     function __construct()
     {
+        $this->site = site_url();
         $this->base = get_template_directory_uri();
         $this->title = "Digital Point";
     }
@@ -27,33 +29,35 @@ class Layout
     }
     function linkMenu()
     {
+        $cat = new Category("servicos");
+        $data = array_map(function ($c) {
+            return [
+                "text" => $c->title,
+                    "short" => $c->resumo,
+                    "link" => $c->link
+            ];
+        }, $cat->data);
         return [
-            ["text" => "Início", "link" => "", "sub" => []],
-            ["text" => "Sobre", "link" => "", "sub" => []],
-            ["text" => "Serviços", "link" => "", "sub" => [
-                [
-                    "text" => "Organização Documental",
-                    "short" => "Todos o processo de armazenamento e classificação de documentos.",
-                    "link" => ""
-                ]
-            ]],
-            ["text" => "Contato", "link" => "", "sub" => []],
+            ["text" => "Início", "link" => $this->site . "/", "sub" => []],
+            ["text" => "Sobre", "link" => $this->site . "/sobre", "sub" => []],
+            ["text" => "Serviços", "link" => "/category/servicos/", "sub" => $data],
+            ["text" => "Contato", "link" => $this->site . "/contato", "sub" => []],
         ];
     }
     function linkCopy()
     {
         return [
-            ["text" => "Termos", "link" => ""],
-            ["text" => "Politica Privacidade", "link" => ""],
-            ["text" => "Cookie", "link" => ""],            
+            ["text" => "Termos", "link" => $this->site . "/termos"],
+            ["text" => "Politica Privacidade", "link" => $this->site . "/politica-privacidade"],
+            ["text" => "Cookie", "link" => $this->site . "/cookie"],
         ];
     }
     function social()
     {
         return [
-            ["ico" => "/instagram.png", "text" => "Instagram", "link" => ""],
-            ["ico" => "/face.png", "text" => "Facebook", "link" => ""],
-            ["ico" => "/twitter.png", "text" => "Twitter", "link" => ""],            
+            ["ico" => "/instagram.png", "text" => "Instagram", "link" => "https://www.instagram.com"],
+            ["ico" => "/face.png", "text" => "Facebook", "link" => "https://www.facebook.com"],
+            ["ico" => "/twitter.png", "text" => "Twitter", "link" => "https://twitter.com"],
         ];
     }
 }
