@@ -13,6 +13,7 @@ $urlTema = get_template_directory_uri();
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="shortcut icon" href="<?php echo $urlTema; ?>/assets/logo/ico.png" type="image/x-icon">
     <link rel="stylesheet" href="https://tailwindcss.com/docs/functions-and-directives/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
         tailwind.config = {
             theme: {
@@ -22,7 +23,9 @@ $urlTema = get_template_directory_uri();
                         verde: '#85C872',
                     },
                     backgroundImage: {
-                        'hero-home': "url('<?= $urlTema ?>/assets/bg/home.png')"
+                        'hero-home': "url('<?= $urlTema ?>/assets/bg/home.png')",
+                        'hero-page': "url('<?= $urlTema ?>/assets/bg/page.png')",
+                        'hero-404': "url('<?= $urlTema ?>/assets/bg/404.png')",
                     }
                 }
             }
@@ -34,7 +37,7 @@ $urlTema = get_template_directory_uri();
 
 <body class="pt-[57px]">
     <?php wp_body_open(); ?>
-    <div class="flex lg:hidden justify-center bg-white fixed left-0 top-0 w-full">
+    <div class="flex lg:hidden justify-center bg-white fixed left-0 top-0 w-full z-20">
         <img class="h-[40px] m-2 " src="<?= $Layout->logo("/logo.png") ?>" alt="<?= $Layout->title ?>">
     </div>
     <header class="hidden lg:flex fixed left-0 top-0 h-[100vh] lg:h-auto w-full z-10 bg-verde lg:bg-[#f5f5f5] js-menu">
@@ -47,7 +50,7 @@ $urlTema = get_template_directory_uri();
                     <img class=" h-[40px] my-4 mx-auto" src="<?= $Layout->logo("/logo-white.png") ?>" alt="<?= $Layout->title ?>">
                 </div>
                 <form action="" method="get" class="hidden lg:flex items-center border-2  rounded-3xl border-azul border-solid text-azul  bg-white p-1 pr-2">
-                    <input type="search" name="s" class="block bg-transparent px-2" placeholder="O que você procura?">
+                    <input type="search" name="s" value="<?= $_REQUEST["s"] ?? "" ?>" class="block bg-transparent px-2" placeholder="O que você procura?">
                     <label>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />

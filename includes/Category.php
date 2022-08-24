@@ -3,10 +3,14 @@
 class Category
 {
     public $data;
-    function __construct($name, $count = -1)
+    function __construct($name = false, $count = -1)
     {
         $this->data = [];
-        query_posts(array('category_name' => $name, 'order' => 'ASC', 'posts_per_page' => $count));
+        $option = array( 'order' => 'ASC', 'posts_per_page' => $count);
+        if($name) {
+            $option['category_name'] = $name;
+            query_posts($option);
+        }
         while (have_posts()) :
             the_post();
             $this->data[] = (object) [
